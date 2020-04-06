@@ -1,1 +1,0 @@
-# ghostpost_backend
