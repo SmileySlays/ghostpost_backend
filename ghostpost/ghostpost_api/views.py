@@ -12,25 +12,25 @@ class GhostPostViewSet(viewsets.ModelViewSet):
     serializer_class = GhostPostSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    @staticmethod
+    @action(detail=True, methods=['get'])
     def index(request):
         items = GhostPost.objects.order_by('-created_date')
         return render(request, "index.html", {"data": items})
 
-    @staticmethod
+    @action(detail=True, methods=['get'])
     def like(request, pk):
                 ghostpost = GhostPost.objects.get(pk=pk)
                 ghostpost.likes += 1
                 ghostpost.save()
     
-    @staticmethod
+    @action(detail=True, methods=['get'])
     def dislike(request, pk):
                 ghostpost = GhostPost.objects.get(pk=pk)
                 ghostpost.dislikes += 1
                 ghostpost.save()
                 return HttpResponseRedirect(reverse('homepage'))
 
-    @staticmethod
+    @action(detail=True, methods=['post'])
     def ghostpost_add_view(request):
         html = "generic_form.html"
 
